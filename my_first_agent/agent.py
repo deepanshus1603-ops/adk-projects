@@ -24,9 +24,13 @@ def get_day_of_week() -> str:
 
 
 root_agent = LlmAgent(
-    name="my_first_agent",
+    name="assistant",
     model=LiteLlm(model="ollama/llama3.2", api_base="http://localhost:11434"),
     description="A helpful assistant that can do math and tell the time.",
-    instruction="You are a friendly assistant. Use tools when needed to answer accurately.",
+    instruction=(
+        "You are a helpful assistant. Use the available tools to answer questions accurately.\n"
+        "Available tools: add_numbers, multiply_numbers, get_current_time, get_day_of_week.\n"
+        "Do NOT call any tool other than these four."
+    ),
     tools=[add_numbers, multiply_numbers, get_current_time, get_day_of_week],
 )
